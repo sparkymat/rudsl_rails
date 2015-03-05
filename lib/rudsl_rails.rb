@@ -2,10 +2,7 @@ require "rudsl_rails/version"
 
 module RudslRails
   class Card
-    include Rails.application.routes.url_helpers
     include Rudsl
-    include UsersHelper
-    include ApplicationHelper
     include ActionView::Helpers::AssetUrlHelper
     include ActionView::Helpers::AssetTagHelper
     include ERB::Util
@@ -14,6 +11,14 @@ module RudslRails
     include ActionView::Context
     include ActionView::Helpers::DateHelper
     include ActionView::Helpers::TextHelper
+
+    def method_missing(method_sym, *arguments, &block)
+      if method_sym.to_s.end_with?("_path") || method_sym.to_s.end_with?("_url")
+        Rails.application.routes.url_helpers.send(method_sym, arguments, &block)
+      else
+        super
+      end
+    end
 
     def node
       # implement node here
@@ -27,6 +32,7 @@ module RudslRails
       view = ActionView::Base.new(Rails.configuration.paths['app/views'])
       view.class_eval do
         include Rails.application.routes.url_helpers
+        include ApplicationHelper
       end
       view.render args.first
     end
