@@ -2,16 +2,9 @@ require "rudsl_rails/version"
 require "rudsl"
 
 module RudslRails
-  class Card
+  class Card < ActionView::Base
     include Rudsl
-    include ActionView::Helpers::AssetUrlHelper
-    include ActionView::Helpers::AssetTagHelper
     include ERB::Util
-    include ActionView::Helpers::TranslationHelper
-    include ActionView::Helpers::TagHelper
-    include ActionView::Context
-    include ActionView::Helpers::DateHelper
-    include ActionView::Helpers::TextHelper
 
     def method_missing(method_sym, *arguments, &block)
       if method_sym.to_s.end_with?("_path") || method_sym.to_s.end_with?("_url")
@@ -26,7 +19,7 @@ module RudslRails
     end
 
     def html
-      node.try(:to_s).try(:html_safe)
+      render html: node.try(:to_s).try(:html_safe)
     end
 
     def render(*args)
