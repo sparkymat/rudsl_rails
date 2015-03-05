@@ -1,4 +1,5 @@
 require "rudsl_rails/version"
+require "rudsl"
 
 module RudslRails
   class Card
