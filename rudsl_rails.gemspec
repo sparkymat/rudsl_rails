@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Ajith Hussain"]
   spec.email         = ["csy0013@googlemail.com"]
   spec.summary       = %q{rudsl_rails provides a nice way of using rudsl inside Rails}
-  spec.description   = %q{rudsl_rails helps organise your Rails view written in rudsl}
+  spec.description   = %q{rudsl_rails helps organise your Rails views written in rudsl, through cards.}
   spec.homepage      = "https://www.github.com/sparkymat/rudsl_rails"
   spec.license       = "MIT"
 
